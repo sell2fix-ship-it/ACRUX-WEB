@@ -22,41 +22,57 @@ export default async function handler(req, res) {
         }
 
         // Get form data from request body
-        const formData = req.body;
+        const requestData = req.body;
 
         // Prepare email parameters
         const emailParams = {
-            from_name: formData.name,
-            from_email: formData.email,
-            phone: formData.phone,
-            property_address: formData.property_address,
-            situation: formData.situation || 'Not specified',
-            price_range: formData.price_range || 'Not specified',
-            message: formData.message || 'No additional details provided',
+            from_name: requestData.name,
+            from_email: requestData.email,
+            phone: requestData.phone,
+            property_address: requestData.property_address,
+            situation: requestData.situation || 'Not specified',
+            price_range: requestData.price_range || 'Not specified',
+            message: requestData.message || 'No additional details provided',
             to_email: 'info@acruxtrust.com'
         };
 
-        // Send email via EmailJS API
-        const response = await fetch(`https://api.emailjs.com/api/v1.0/email/send`, {
+        // Send email via EmailJS REST API
+        // EmailJS API v1.0 uses JSON format
+        const emailjsPayload = {
+            service_id: SERVICE_ID,
+            template_id: TEMPLATE_ID,
+            user_id: PUBLIC_KEY,
+            template_params: emailParams
+        };
+
+        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                service_id: SERVICE_ID,
-                template_id: TEMPLATE_ID,
-                user_id: PUBLIC_KEY,
-                template_params: emailParams
-            })
+            body: JSON.stringify(emailjsPayload)
         });
 
+        const responseText = await response.text();
+        
         if (!response.ok) {
-            const errorData = await response.text();
-            console.error('EmailJS API error:', errorData);
+            console.error('EmailJS API error:', response.status, responseText);
+            // Try to parse as JSON for detailed error, otherwise use text
+            let errorDetails = responseText;
+            try {
+                const errorJson = JSON.parse(responseText);
+                errorDetails = errorJson;
+            } catch (e) {
+                // Not JSON, use text as-is
+            }
             return res.status(500).json({ 
-                error: 'Failed to send email. Please try again later.' 
+                error: 'Failed to send email. Please try again later.',
+                details: errorDetails
             });
         }
+
+        // EmailJS returns "OK" text on success, not JSON
+        console.log('EmailJS success:', response.status, responseText);
 
         // Success
         return res.status(200).json({ 
