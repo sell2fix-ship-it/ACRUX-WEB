@@ -20,20 +20,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form Submission Handler
     const offerForm = document.getElementById('offer-form');
     if (offerForm) {
-        offerForm.addEventListener('submit', function(e) {
+        offerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = offerForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
             
             // Get form data
             const formData = new FormData(offerForm);
             const data = Object.fromEntries(formData);
             
-            // In a real application, you would send this data to a server
-            // For now, we'll just show an alert
-            alert('Thank you for your submission! We will contact you within 24 hours with a fair cash offer.\n\n' +
-                  'In a production environment, this form would be submitted to a server.');
-            
-            // Reset form
-            offerForm.reset();
+            try {
+                // Send email via Vercel serverless function
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Thank you for your submission! We will contact you within 24 hours with a fair cash offer.');
+                    offerForm.reset();
+                } else {
+                    throw new Error(result.error || 'Failed to send message');
+                }
+            } catch (error) {
+                alert('There was an error sending your message. Please try again or call us at (305) 925-2475.');
+                console.error('Form submission error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
         });
     }
 
