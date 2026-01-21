@@ -469,6 +469,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Testimonials */
+.testimonial-video-container {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonial-video {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
 .testimonials {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -870,6 +886,14 @@ h1, h2, h3, h4, h5, h6 {
 
     .header-bbb {
         display: none;
+    }
+
+    .testimonial-video-container {
+        padding: 0 10px;
+    }
+
+    .testimonial-video {
+        max-width: 100%;
     }
 
     .testimonials {
