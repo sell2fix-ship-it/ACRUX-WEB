@@ -34,26 +34,65 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = Object.fromEntries(formData);
             
             try {
-                // Send email via Vercel serverless function
-                const response = await fetch('/api/send-email', {
+                // EmailJS credentials (public key is safe to expose in client-side code)
+                const EMAILJS_PUBLIC_KEY = 'bXF5c1UFpUY4KtofM';
+                const EMAILJS_SERVICE_ID = 'service_utvgzgj';
+                const EMAILJS_TEMPLATE_ID = 'template_uco8l4a';
+                
+                // Prepare email parameters for EmailJS
+                const emailParams = {
+                    from_name: data.name,
+                    from_email: data.email,
+                    phone: data.phone,
+                    property_address: data.property_address,
+                    situation: data.situation || 'Not specified',
+                    price_range: data.price_range || 'Not specified',
+                    message: data.message || 'No additional details provided',
+                    to_email: 'info@acruxtrust.com'
+                };
+                
+                // Call EmailJS directly from the browser
+                const emailjsPayload = {
+                    service_id: EMAILJS_SERVICE_ID,
+                    template_id: EMAILJS_TEMPLATE_ID,
+                    user_id: EMAILJS_PUBLIC_KEY,
+                    template_params: emailParams
+                };
+                
+                const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(emailjsPayload)
                 });
 
-                const result = await response.json();
+                const responseText = await response.text();
 
                 if (response.ok) {
                     alert('Thank you for your submission! We will contact you within 24 hours with a fair cash offer.');
                     offerForm.reset();
                 } else {
-                    throw new Error(result.error || 'Failed to send message');
+                    let errorMessage = 'Failed to send message. Please try again or call us at (305) 925-2475.';
+                    
+                    // Try to parse error details
+                    try {
+                        const errorJson = JSON.parse(responseText);
+                        if (errorJson.error || errorJson.message) {
+                            errorMessage = errorJson.error || errorJson.message;
+                        }
+                    } catch (e) {
+                        // Not JSON, use the text response
+                        if (responseText) {
+                            errorMessage = responseText;
+                        }
+                    }
+                    
+                    throw new Error(errorMessage);
                 }
             } catch (error) {
-                alert('There was an error sending your message. Please try again or call us at (305) 925-2475.');
                 console.error('Form submission error:', error);
+                alert('There was an error sending your message. Please try again or call us at (305) 925-2475.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;

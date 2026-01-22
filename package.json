@@ -2,10 +2,11 @@
   "name": "acrux-website",
   "version": "1.0.0",
   "description": "Acrux Trust, Inc. Website",
-  "scripts": {
-    "dev": "vercel dev"
-  },
+  "scripts": {},
   "devDependencies": {
     "vercel": "^34.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
   }
 }
