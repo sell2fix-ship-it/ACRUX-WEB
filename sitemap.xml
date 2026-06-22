@@ -1,42 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  <url>
-    <loc>https://acruxtrust.com/</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://acruxtrust.com/#how-it-works</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://acruxtrust.com/#situations</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://acruxtrust.com/#benefits</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://acruxtrust.com/#reviews</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://acruxtrust.com/#contact</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!--  Homepage  -->
+<url>
+<loc>https://acruxtrust.com/</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  Foreclosure / Lis Pendens  -->
+<url>
+<loc>https://acruxtrust.com/sell-house-in-foreclosure-florida</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/what-happens-after-lis-pendens-florida</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/foreclosure-timeline-miami-dade</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/stop-foreclosure-auction-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  Condo / HOA Special Assessments  -->
+<url>
+<loc>https://acruxtrust.com/cant-afford-condo-special-assessment-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/sell-condo-unpaid-assessment-florida</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  Probate / Inherited  -->
+<url>
+<loc>https://acruxtrust.com/sell-inherited-house-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/what-happens-house-probate-florida</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  Reverse Mortgage  -->
+<url>
+<loc>https://acruxtrust.com/inherited-house-reverse-mortgage-florida</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/sell-house-reverse-mortgage-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  Back Taxes  -->
+<url>
+<loc>https://acruxtrust.com/sell-house-back-taxes-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  Code Violations / Open Permits / Liens  -->
+<url>
+<loc>https://acruxtrust.com/sell-house-code-violations-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/sell-house-open-permit-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/sell-house-with-liens-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  PACE / Ygrene  -->
+<url>
+<loc>https://acruxtrust.com/sell-house-ygrene-pace-loan-florida</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<!--  Trust Builders  -->
+<url>
+<loc>https://acruxtrust.com/how-does-cash-home-sale-work-miami</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
+<url>
+<loc>https://acruxtrust.com/is-acrux-trust-inc-legit</loc>
+<lastmod>2026-06-22</lastmod>
+</url>
 </urlset>
