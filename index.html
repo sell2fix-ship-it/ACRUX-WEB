@@ -116,7 +116,7 @@ h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
   gap: 20px;
   padding: 14px 0;
 }
-.logo img { height: 60px; width: auto; }
+.logo img { height: 80px; width: auto; }
 .nav { display: flex; gap: 28px; align-items: center; }
 .nav a {
   font-family: 'Poppins', sans-serif;
@@ -864,10 +864,12 @@ h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
   .about-stats { grid-template-columns: repeat(2, 1fr); }
   .footer-content { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
-  .header-content { flex-wrap: wrap; }
-  .header-right { order: 3; width: 100%; justify-content: center; padding-bottom: 10px; }
-  .header-bbb { display: flex; }
+  .header-content { flex-wrap: nowrap; align-items: center; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
   .header-cta { display: none; }
+  .bbb-logo { height: 28px !important; }
+  .bbb-rating-text { font-size: 0.68rem !important; }
+  .logo img { height: 60px; }
 }
 </style>
 </head>
