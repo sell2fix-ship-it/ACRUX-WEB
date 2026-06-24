@@ -1480,23 +1480,37 @@ h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
 
 <script src="script.js"></script>
 <script>
-  // Mobile nav toggle
+  // Mobile nav toggle - start hidden
   const toggle = document.querySelector('.mobile-menu-toggle');
   const nav = document.querySelector('.nav');
   if (toggle && nav) {
+    // Ensure nav is hidden on mobile on page load
+    if (window.innerWidth <= 600) {
+      nav.style.display = 'none';
+    }
     toggle.addEventListener('click', function() {
-      const open = nav.style.display === 'flex';
-      nav.style.display = open ? 'none' : 'flex';
-      nav.style.flexDirection = 'column';
-      nav.style.position = 'absolute';
-      nav.style.top = '72px';
-      nav.style.left = '0';
-      nav.style.right = '0';
-      nav.style.background = '#1a1a2e';
-      nav.style.padding = '20px 24px';
-      nav.style.gap = '16px';
-      nav.style.zIndex = '99';
-      if (open) nav.style.display = 'none';
+      const isOpen = nav.style.display === 'flex';
+      if (isOpen) {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '100%';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.background = '#1a1a2e';
+        nav.style.padding = '20px 24px';
+        nav.style.gap = '16px';
+        nav.style.zIndex = '99';
+        nav.style.borderTop = '1px solid rgba(255,255,255,0.1)';
+      }
+    });
+    // Close nav when a link is clicked
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.style.display = 'none';
+      });
     });
   }
 </script>
