@@ -864,11 +864,22 @@ h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
   .about-stats { grid-template-columns: repeat(2, 1fr); }
   .footer-content { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
-  .header-content { flex-wrap: nowrap; align-items: center; }
-  .header-right { display: flex; align-items: center; gap: 10px; }
-  .header-cta { display: none; }
+  .header-content { flex-wrap: wrap; gap: 8px; }
+  .logo { flex: 1; }
+  .mobile-menu-toggle { order: 2; }
+  .header-right {
+    order: 3;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    padding-bottom: 8px;
+    gap: 10px;
+  }
+  .header-bbb { display: flex !important; }
+  .header-cta { display: none !important; }
   .bbb-logo { height: 28px !important; }
-  .bbb-rating-text { font-size: 0.68rem !important; }
+  .bbb-rating-text { font-size: 0.75rem !important; color: #e8a838 !important; font-weight: 700 !important; }
+}
   .logo img { height: 60px; }
 }
 </style>
