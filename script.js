@@ -1,4 +1,3 @@
-// Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const nav = document.querySelector('.nav');
@@ -8,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.classList.toggle('active');
         });
 
-        // Close menu when clicking on a link
         const navLinks = nav.querySelectorAll('a');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -17,79 +15,56 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Form Submission Handler
-    const offerForm = document.getElementById('offer-form');
-    if (offerForm) {
-        offerForm.addEventListener('submit', async function(e) {
+    // Shared EmailJS sender
+    async function sendViaEmailJS(params) {
+        const emailjsPayload = {
+            service_id: 'service_utvgzgj',
+            template_id: 'template_uco8l4a',
+            user_id: 'bXF5c1UFpUY4KtofM',
+            template_params: {
+                from_name: params.name,
+                from_email: params.email || '',
+                phone: params.phone,
+                property_address: params.address || params.property_address || '',
+                situation: params.situation || 'Not specified',
+                price_range: params.price_range || 'Not specified',
+                message: params.message || 'No additional details provided',
+                to_email: 'info@acruxtrust.com'
+            }
+        };
+
+        const response = await fetch('https://api.emailjs.com/api/v1.1/email/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailjsPayload)
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(text || 'Failed to send');
+        }
+    }
+
+    // Generic form handler
+    function attachFormHandler(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Show loading state
-            const submitBtn = offerForm.querySelector('button[type="submit"]');
+
+            const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
-            
-            // Get form data
-            const formData = new FormData(offerForm);
+
+            const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-            
+
             try {
-                // EmailJS credentials (public key is safe to expose in client-side code)
-                const EMAILJS_PUBLIC_KEY = 'bXF5c1UFpUY4KtofM';
-                const EMAILJS_SERVICE_ID = 'service_utvgzgj';
-                const EMAILJS_TEMPLATE_ID = 'template_uco8l4a';
-                
-                // Prepare email parameters for EmailJS
-                const emailParams = {
-                    from_name: data.name,
-                    from_email: data.email,
-                    phone: data.phone,
-                    property_address: data.property_address,
-                    situation: data.situation || 'Not specified',
-                    price_range: data.price_range || 'Not specified',
-                    message: data.message || 'No additional details provided',
-                    to_email: 'info@acruxtrust.com'
-                };
-                
-                // Call EmailJS directly from the browser
-                const emailjsPayload = {
-                    service_id: EMAILJS_SERVICE_ID,
-                    template_id: EMAILJS_TEMPLATE_ID,
-                    user_id: EMAILJS_PUBLIC_KEY,
-                    template_params: emailParams
-                };
-                
-                const response = await fetch('https://api.emailjs.com/api/v1.1/email/send', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(emailjsPayload)
-                });
-
-                const responseText = await response.text();
-
-                if (response.ok) {
-                    alert('Thank you for your submission! We will contact you within 24 hours with a fair cash offer.');
-                    offerForm.reset();
-                } else {
-                    let errorMessage = 'Failed to send message. Please try again or call us at (305) 925-2475.';
-                    
-                    // Try to parse error details
-                    try {
-                        const errorJson = JSON.parse(responseText);
-                        if (errorJson.error || errorJson.message) {
-                            errorMessage = errorJson.error || errorJson.message;
-                        }
-                    } catch (e) {
-                        // Not JSON, use the text response
-                        if (responseText) {
-                            errorMessage = responseText;
-                        }
-                    }
-                    
-                    throw new Error(errorMessage);
-                }
+                await sendViaEmailJS(data);
+                alert('Thank you for your submission! We will contact you within 24 hours with a fair cash offer.');
+                form.reset();
             } catch (error) {
                 console.error('Form submission error:', error);
                 alert('There was an error sending your message. Please try again or call us at (305) 925-2475.');
@@ -100,7 +75,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Smooth scroll for anchor links
+    // Attach to both forms
+    attachFormHandler('offer-form');
+    attachFormHandler('offer-form-2');
+
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -111,30 +90,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     const headerOffset = 80;
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 }
             }
         });
     });
 
-    // Add scroll effect to header
-    let lastScroll = 0;
+    // Header scroll shadow
     const header = document.querySelector('.header');
-    
     window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
+        if (window.pageYOffset > 100) {
             header.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.15)';
         } else {
             header.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
         }
-        
-        lastScroll = currentScroll;
     });
 
     // Acrux Name Popup
@@ -153,14 +122,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Close popup when clicking outside
         acruxPopup.addEventListener('click', function(e) {
             if (e.target === acruxPopup) {
                 acruxPopup.classList.remove('active');
             }
         });
 
-        // Close popup with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && acruxPopup.classList.contains('active')) {
                 acruxPopup.classList.remove('active');
@@ -168,4 +135,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
