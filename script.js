@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     template_params: emailParams
                 };
                 
-                const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                const response = await fetch('https://api.emailjs.com/api/v1.1/email/send', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
